@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-echo "initialize deb8frontacc container"
+echo "deb8frontacc - a FrontAccounting on Debian 8 Docker Container"
 
 WEBROOT="/var/www/html"
 OLDINDEX="/root/oldfiles/index.html"
@@ -34,34 +34,34 @@ if [ "$#" != "0" ]; then
             exit 1
         fi
         FQDN="$2"
-	# check if new key and cert needed
+    # check if new key and cert needed
         set +e
-	cmp $OLDKEY $SSLKEY > /dev/null
+    cmp $OLDKEY $SSLKEY > /dev/null
         SAMEKEY=$?
         cmp $OLDCERT $SSLCERT > /dev/null
         SAMECERT=$?
         set -e
-	if [[ $SAMEKEY -eq 0 ]] || [[ $SAMECERT -eq 0 ]]; then
+    if [[ $SAMEKEY -eq 0 ]] || [[ $SAMECERT -eq 0 ]]; then
             # create new self-signed secure ones
             openssl genrsa -out $SSLKEY 2048
             openssl req -new -x509 -sha256 -days 3653 -key $SSLKEY -out $SSLCERT -subj "/CN=$FQDN"
         fi
         # set apache ServerName globally
         sed -i "/# Global configuration/a ServerName $FQDN" /etc/apache2/apache2.conf
-	# set accepetable SSL ciphers
-	sed -i 's/SSLCipherSuite HIGH:!aNULL.*/SSLCipherSuite ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:ECDH+3DES:DH+3DES:RSA+AESGCM:RSA+AES:RSA+3DES:!aNULL:!MD5:!DSS/' /etc/apache2/mods-available/ssl.conf
-	# set to redirect HTTP to HTTPS (HSTS Strict Transport Security)
-	sed -i "s/DocumentRoot \/var\/www\/html.*/Redirect permanent \/ https:\/\/$FQDN\//" /etc/apache2/sites-available/000-default.conf
-	# enable SSL
-	a2enmod ssl
-	# enable SSL site
-	ln -sf /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-enabled/default-ssl.conf
+    # set accepetable SSL ciphers
+    sed -i 's/SSLCipherSuite HIGH:!aNULL.*/SSLCipherSuite ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:ECDH+3DES:DH+3DES:RSA+AESGCM:RSA+AES:RSA+3DES:!aNULL:!MD5:!DSS/' /etc/apache2/mods-available/ssl.conf
+    # set to redirect HTTP to HTTPS (HSTS Strict Transport Security)
+    sed -i "s/DocumentRoot \/var\/www\/html.*/Redirect permanent \/ https:\/\/$FQDN\//" /etc/apache2/sites-available/000-default.conf
+    # enable SSL
+    a2enmod ssl
+    # enable SSL site
+    ln -sf /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-enabled/default-ssl.conf
         # initialize webapp if no content present
         if [ ! "$(ls -A $WEBROOT)" ]; then
             init_content
         fi
-	# start apache2
-	exec apache2ctl -D FOREGROUND
+    # start apache2
+    exec apache2ctl -D FOREGROUND
         exit
     elif [ $CMD == '--help' ]; then
         echo "show help"

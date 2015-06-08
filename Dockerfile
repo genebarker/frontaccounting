@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------
-# deb8frontacc - FrontAccounting on Debian 8 (Jessie)
+# deb8frontacc - a FrontAccounting on Debian 8 Docker Container
 #
-# build 24 
+# build 25 
 #----------------------------------------------------------------------
 
 FROM debian:8.0

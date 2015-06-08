@@ -11,6 +11,8 @@ $ docker run --rm genebarker/deb8frontacc
 Which produces the following:
 
 ```text
+deb8frontacc - a FrontAccounting on Debian 8 Docker Container
+
 usage: genebarker/deb8frontacc [OPTION]
 
 The available OPTIONs are:
