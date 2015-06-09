@@ -71,6 +71,32 @@ Note: FA requires a MySQL DB for data storage. We recommend the
 
 [FA] requires a MySQL database for data storage. As per best practice, this [FA] container does not include such a database - this is best served by using your own or even better, using the official MySQL container image ([mysql]).
 
+### Quick Start ###
+
+(1) Spin-up mysql container and create database for FA:
+
+```text
+$ docker pull mysql
+$ docker run -d -P --name fa_db -e MYSQL_ROOT_PASSWORD=quickDIRTY mysql 
+$ docker exec -it fa_db mysqladmin -u root -p create fa23
+  (enter quickDIRTY for password)
+```
+
+(2) Spin-up FA container:
+
+```text
+$ docker run -d -p 80:80 --name fa_web --link fa_db:fa_db genebarker/deb8frontacc --http
+```
+
+(3) Open browser, enter your host's URL, and on Step 2: Database Server Settings:
+
+- Server Host: `fa_db`
+- Database User: `root`
+- Database Password: `quickDIRTY`
+- Database Name: `fa23`
+
+(4) Enjoy!
+
 [FA]:http://frontaccounting.com/fawiki/
 [HSTS]:http://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security
 [mysql]:https://registry.hub.docker.com/_/mysql/
