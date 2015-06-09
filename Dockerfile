@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------
 # deb8frontacc - a FrontAccounting on Debian 8 Docker Container
 #
-# build 25 
+# build 26 
 #----------------------------------------------------------------------
 
 FROM debian:8.0
@@ -37,8 +37,10 @@ ENV APACHE_RUN_USER www-data \
     APACHE_RUN_GROUP www-data \
     APACHE_LOG_DIR /var/log/apache2
 
-# copy in and set entrypoint script
-COPY ./entrypoint.sh /
+# copy in entrypoint and lockdown scripts
+COPY ./entrypoint.sh ./lockdown.sh /
+
+# set the container's entrypoint
 ENTRYPOINT ["/entrypoint.sh"]
 
 # expose default webapp ports

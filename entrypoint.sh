@@ -84,9 +84,40 @@ echo "   --hsts FQDN   Run FA using HTTPS only"
 echo "                 (must provide FQDN, i.e. mybox.example.com)"
 echo "   --help        Display this message"
 echo
-echo "Note: FA requires a mysql DB for data storage. If you wish to"
-echo "      run this DB as a container, see the official mysql repo at"
-echo "      https://registry.hub.docker.com/_/mysql/"
+echo "To use FA webapp content on the host, mount it, i.e.:"
+echo "   $ docker run -d -p 80:80 \\"
+echo "       -v /home/elvis/frontacc:/var/www/html \\"
+echo "       --name fa_web \\"
+echo "       genebarker/deb8frontacc --http"
+echo
+echo "   (if host dir empty, the container will initialize it)"
+echo
+echo "To run FA with strict HTTPS creating new self-signed keys:"
+echo "   $ docker run -d -p 80:80 -p 443:443 \\"
+echo "       --name fa_web \\"
+echo "       genebarker/deb8frontacc --hsts mybox.example.com"
+echo
+echo "To run FA with strict HTTPS using your own keys, mount them, i.e.:"
+echo "   $ docker run -d -p 80:80 -p 443:443 \\"
+echo "       -v /etc/ssl:/etc/ssl \\"
+echo "       --name fa_web \\"
+echo "       genebarker/deb8frontacc --hsts mybox.example.com"
+echo
+echo "   (the cert's CN must match the FQDN)"
+echo
+echo "To link FA with a MySQL container named 'fa_db', i.e.:"
+echo "   $ docker run -d -p 80:80 \\"
+echo "       --name fa_web"
+echo "       --link fa_db:fa_db"
+echo "       genebarker/deb8frontacc --http"
+echo
+echo "   (then use 'fa_db' for the MySQL hostname)"
+echo
+echo "To lockdown FA installation scripts after configuration:"
+echo "   $ docker exec fa_web /lockdown.sh"
+echo
+echo "To bypass script, just enter desired command, i.e.:"
+echo "   $ docker run -i -t genebarker/deb8frontacc bash"
 echo
 echo "Key paths in the container:"
 echo "   /var/www/html  - FA webapp content"
@@ -94,25 +125,8 @@ echo "   /etc/ssl       - SSL keys and certificates"
 echo "   /etc/ssl/private/ssl-cert-snakeoil.key  - Private SSL key"
 echo "   /etc/ssl/certs/ssl-cert-snakeoil.pem    - Public SSL cert"
 echo
-echo "To use FA webapp content on the host, mount it, i.e.:"
-echo "   $ docker run -d -p 80:80 \\"
-echo "       -v /home/elvis/frontacc:/var/www/html \\"
-echo "       genebarker/deb8frontacc --http"
-echo
-echo "   (if host dir empty, the container will initialize it)"
-echo
-echo "To run FA with strict HTTPS creating new self-signed keys:"
-echo "   $ docker run -d -p 80:80 -p 443:443 \\"
-echo "       genebarker/deb8frontacc --hsts mybox.example.com"
-echo
-echo "To run FA with strict HTTPS using your own keys, mount them, i.e.:"
-echo "   $ docker run -d -p 80:80 -p 443:443 \\"
-echo "       -v /etc/ssl:/etc/ssl \\"
-echo "       genebarker/deb8frontacc --hsts mybox.example.com"
-echo
-echo "   (the cert's CN must match the FQDN)"
-echo
-echo "To bypass script, just enter desired command, i.e.:"
-echo "   $ docker run -i -t genebarker/deb8frontacc /bin/bash"
-echo
+echo "Note: FA requires a MySQL DB for data storage. We recommend the"
+echo "      use of the official container images found here:"
+echo "      https://registry.hub.docker.com/_/mysql/"
+
 exit 0

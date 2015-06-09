@@ -1,6 +1,6 @@
 deb8frontacc
 ------------
-FrontAccounting on Debian 8 (Jessie) with support for strict HTTPS (HSTS).
+FrontAccounting ([FA]) on Debian 8 (Jessie) with support for strict HTTPS ([HSTS]).
 
 For usage info, just run the image without a command:
 
@@ -21,9 +21,40 @@ The available OPTIONs are:
                  (must provide FQDN, i.e. mybox.example.com)
    --help        Display this message
 
-Note: FA requires a mysql DB for data storage. If you wish to
-      run this DB as a container, see the official mysql repo at
-      https://registry.hub.docker.com/_/mysql/
+To use FA webapp content on the host, mount it, i.e.:
+   $ docker run -d -p 80:80 \
+       -v /home/elvis/frontacc:/var/www/html \
+       --name fa_web \
+       genebarker/deb8frontacc --http
+
+   (if host dir empty, the container will initialize it)
+
+To run FA with strict HTTPS creating new self-signed keys:
+   $ docker run -d -p 80:80 -p 443:443 \
+       --name fa_web \
+       genebarker/deb8frontacc --hsts mybox.example.com
+
+To run FA with strict HTTPS using your own keys, mount them, i.e.:
+   $ docker run -d -p 80:80 -p 443:443 \
+       -v /etc/ssl:/etc/ssl \
+       --name fa_web \
+       genebarker/deb8frontacc --hsts mybox.example.com
+
+   (the cert's CN must match the FQDN)
+
+To link FA with a MySQL container named 'fa_db', i.e.:
+   $ docker run -d -p 80:80 \
+       --name fa_web
+       --link fa_db:fa_db
+       genebarker/deb8frontacc --http
+
+   (then use 'fa_db' for the MySQL hostname)
+
+To lockdown FA installation scripts after configuration:
+   $ docker exec fa_web /lockdown.sh
+
+To bypass script, just enter desired command, i.e.:
+   $ docker run -i -t genebarker/deb8frontacc bash
 
 Key paths in the container:
    /var/www/html  - FA webapp content
@@ -31,24 +62,15 @@ Key paths in the container:
    /etc/ssl/private/ssl-cert-snakeoil.key  - Private SSL key
    /etc/ssl/certs/ssl-cert-snakeoil.pem    - Public SSL cert
 
-To use FA webapp content on the host, mount it, i.e.:
-   $ docker run -d -p 80:80 \
-       -v /home/elvis/frontacc:/var/www/html \
-       genebarker/deb8frontacc --http
-
-   (if host dir empty, the container will initialize it)
-
-To run FA with strict HTTPS creating new self-signed keys:
-   $ docker run -d -p 80:80 -p 443:443 \
-       genebarker/deb8frontacc --hsts mybox.example.com
-
-To run FA with strict HTTPS using your own keys, mount them, i.e.:
-   $ docker run -d -p 80:80 -p 443:443 \
-       -v /etc/ssl:/etc/ssl \
-       genebarker/deb8frontacc --hsts mybox.example.com
-
-   (the cert's CN must match the FQDN)
-
-To bypass script, just enter desired command, i.e.:
-   $ docker run -i -t genebarker/deb8frontacc /bin/bash
+Note: FA requires a MySQL DB for data storage. We recommend the
+      use of the official container images found here:
+      https://registry.hub.docker.com/_/mysql/
 ```
+
+### MySQL ###
+
+[FA] requires a MySQL database for data storage. As per best practice, this [FA] container does not include such a database - this is best served by using your own or even better, using the official MySQL container image ([mysql]).
+
+[FA]:http://frontaccounting.com/fawiki/
+[HSTS]:http://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security
+[mysql]:https://registry.hub.docker.com/_/mysql/
