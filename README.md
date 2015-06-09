@@ -85,6 +85,7 @@ $ docker exec -it fa_db mysqladmin -u root -p create fa23
 (2) Spin-up FA container:
 
 ```text
+$ docker pull genebarker/deb8frontacc
 $ docker run -d -p 80:80 --name fa_web --link fa_db:fa_db genebarker/deb8frontacc --http
 ```
 
