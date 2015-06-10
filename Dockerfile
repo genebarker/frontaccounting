@@ -1,10 +1,10 @@
 #----------------------------------------------------------------------
 # deb8frontacc - a FrontAccounting on Debian 8 Docker Container
 #
-# build 26 
+# build 27 
 #----------------------------------------------------------------------
 
-FROM debian:8.0
+FROM debian:8.1
 
 MAINTAINER Eugene F. Barker <genebarker@gmail.com>
 
