@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-echo "lockdown this deb8frontacc Docker Container"
+echo "lockdown this frontaccounting Docker Container"
 
 # switch to FA root directory
 cd /var/www/html

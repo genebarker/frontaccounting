@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-echo "deb8frontacc - a FrontAccounting on Debian 8 Docker Container"
+echo "frontaccounting - a FrontAccounting on Debian 8 Docker Container"
 
 WEBROOT="/var/www/html"
 OLDINDEX="/root/oldfiles/index.html"
@@ -76,7 +76,7 @@ if [ "$#" != "0" ]; then
 fi
 
 echo
-echo "usage: genebarker/deb8frontacc [OPTION]"
+echo "usage: genebarker/frontaccounting [OPTION]"
 echo
 echo "The available OPTIONs are:"
 echo "   --http        Run FA using plain HTTP"
@@ -88,20 +88,20 @@ echo "To use FA webapp content on the host, mount it, i.e.:"
 echo "   $ docker run -d -p 80:80 \\"
 echo "       -v /home/elvis/frontacc:/var/www/html \\"
 echo "       --name fa_web \\"
-echo "       genebarker/deb8frontacc --http"
+echo "       genebarker/frontaccounting --http"
 echo
 echo "   (if host dir empty, the container will initialize it)"
 echo
 echo "To run FA with strict HTTPS creating new self-signed keys:"
 echo "   $ docker run -d -p 80:80 -p 443:443 \\"
 echo "       --name fa_web \\"
-echo "       genebarker/deb8frontacc --hsts mybox.example.com"
+echo "       genebarker/frontaccounting --hsts mybox.example.com"
 echo
 echo "To run FA with strict HTTPS using your own keys, mount them, i.e.:"
 echo "   $ docker run -d -p 80:80 -p 443:443 \\"
 echo "       -v /etc/ssl:/etc/ssl \\"
 echo "       --name fa_web \\"
-echo "       genebarker/deb8frontacc --hsts mybox.example.com"
+echo "       genebarker/frontaccounting --hsts mybox.example.com"
 echo
 echo "   (the cert's CN must match the FQDN)"
 echo
@@ -109,7 +109,7 @@ echo "To link FA with a MySQL container named 'fa_db', i.e.:"
 echo "   $ docker run -d -p 80:80 \\"
 echo "       --name fa_web"
 echo "       --link fa_db:fa_db"
-echo "       genebarker/deb8frontacc --http"
+echo "       genebarker/frontaccounting --http"
 echo
 echo "   (then use 'fa_db' for the MySQL hostname)"
 echo
@@ -117,7 +117,7 @@ echo "To lockdown FA installation scripts after configuration:"
 echo "   $ docker exec fa_web /lockdown.sh"
 echo
 echo "To bypass script, just enter desired command, i.e.:"
-echo "   $ docker run -i -t genebarker/deb8frontacc bash"
+echo "   $ docker run -i -t genebarker/frontaccounting bash"
 echo
 echo "Key paths in the container:"
 echo "   /var/www/html  - FA webapp content"

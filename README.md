@@ -5,15 +5,15 @@ FrontAccounting ([FA]) on Debian 8 (Jessie) with support for strict HTTPS ([HSTS
 For usage info, just run the image without a command:
 
 ```text
-$ docker run --rm genebarker/deb8frontacc
+$ docker run --rm genebarker/frontaccounting
 ```
 
 Which produces the following:
 
 ```text
-deb8frontacc - a FrontAccounting on Debian 8 Docker Container
+frontaccounting - a FrontAccounting on Debian 8 Docker Container
 
-usage: genebarker/deb8frontacc [OPTION]
+usage: genebarker/frontaccounting [OPTION]
 
 The available OPTIONs are:
    --http        Run FA using plain HTTP
@@ -25,20 +25,20 @@ To use FA webapp content on the host, mount it, i.e.:
    $ docker run -d -p 80:80 \
        -v /home/elvis/frontacc:/var/www/html \
        --name fa_web \
-       genebarker/deb8frontacc --http
+       genebarker/frontaccounting --http
 
    (if host dir empty, the container will initialize it)
 
 To run FA with strict HTTPS creating new self-signed keys:
    $ docker run -d -p 80:80 -p 443:443 \
        --name fa_web \
-       genebarker/deb8frontacc --hsts mybox.example.com
+       genebarker/frontaccounting --hsts mybox.example.com
 
 To run FA with strict HTTPS using your own keys, mount them, i.e.:
    $ docker run -d -p 80:80 -p 443:443 \
        -v /etc/ssl:/etc/ssl \
        --name fa_web \
-       genebarker/deb8frontacc --hsts mybox.example.com
+       genebarker/frontaccounting --hsts mybox.example.com
 
    (the cert's CN must match the FQDN)
 
@@ -46,7 +46,7 @@ To link FA with a MySQL container named 'fa_db', i.e.:
    $ docker run -d -p 80:80 \
        --name fa_web
        --link fa_db:fa_db
-       genebarker/deb8frontacc --http
+       genebarker/frontaccounting --http
 
    (then use 'fa_db' for the MySQL hostname)
 
@@ -54,7 +54,7 @@ To lockdown FA installation scripts after configuration:
    $ docker exec fa_web /lockdown.sh
 
 To bypass script, just enter desired command, i.e.:
-   $ docker run -i -t genebarker/deb8frontacc bash
+   $ docker run -i -t genebarker/frontaccounting bash
 
 Key paths in the container:
    /var/www/html  - FA webapp content
@@ -85,8 +85,8 @@ $ docker exec -it fa_db mysqladmin -u root -p create fa23
 (2) Spin-up FA container:
 
 ```text
-$ docker pull genebarker/deb8frontacc
-$ docker run -d -p 80:80 --name fa_web --link fa_db:fa_db genebarker/deb8frontacc --http
+$ docker pull genebarker/frontaccounting
+$ docker run -d -p 80:80 --name fa_web --link fa_db:fa_db genebarker/frontaccounting --http
 ```
 
 (3) Open browser, enter your host's URL, and on Step 2: Database Server Settings:
