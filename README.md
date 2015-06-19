@@ -1,5 +1,5 @@
-deb8frontacc
-------------
+FrontAccounting
+---------------
 FrontAccounting ([FA]) on Debian 8 (Jessie) with support for strict HTTPS ([HSTS]).
 
 For usage info, just run the image without a command:
