@@ -11,7 +11,7 @@ $ docker run --rm genebarker/frontaccounting
 Which produces the following:
 
 ```text
-frontaccounting - a FrontAccounting on Debian 8 Docker Container
+frontaccounting - FrontAccounting on Debian 8 Docker Container
 
 usage: genebarker/frontaccounting [OPTION]
 
@@ -23,7 +23,7 @@ The available OPTIONs are:
 
 To use FA webapp content on the host, mount it, i.e.:
    $ docker run -d -p 80:80 \
-       -v /home/elvis/frontacc:/var/www/html \
+       -v /home/me/frontacc:/var/www/html \
        --name fa_web \
        genebarker/frontaccounting --http
 
@@ -51,10 +51,10 @@ To link FA with a MySQL container named 'fa_db', i.e.:
    (then use 'fa_db' for the MySQL hostname)
 
 To lockdown FA installation scripts after configuration:
-   $ docker exec fa_web /lockdown.sh
+   $ docker exec -it fa_web /lockdown.sh
 
 To bypass script, just enter desired command, i.e.:
-   $ docker run -i -t genebarker/frontaccounting bash
+   $ docker run -it genebarker/frontaccounting bash
 
 Key paths in the container:
    /var/www/html  - FA webapp content
@@ -69,7 +69,7 @@ Note: FA requires a MySQL DB for data storage. We recommend the
 
 ### MySQL ###
 
-[FA] requires a MySQL database for data storage. As per best practice, this [FA] container does not include such a database - this is best served by using your own or even better, using the official MySQL container image ([mysql]).
+[FA] requires a MySQL database for data storage. As per best practice, this FA container does not include such a database - this is best served by using your own or even better, using the official MySQL container image ([mysql]).
 
 ### Quick Start ###
 

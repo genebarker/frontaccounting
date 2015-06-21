@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-echo "frontaccounting - a FrontAccounting on Debian 8 Docker Container"
+echo "frontaccounting - FrontAccounting on Debian 8 Docker Container"
 
 WEBROOT="/var/www/html"
 OLDINDEX="/root/oldfiles/index.html"
@@ -86,7 +86,7 @@ echo "   --help        Display this message"
 echo
 echo "To use FA webapp content on the host, mount it, i.e.:"
 echo "   $ docker run -d -p 80:80 \\"
-echo "       -v /home/elvis/frontacc:/var/www/html \\"
+echo "       -v /home/me/frontacc:/var/www/html \\"
 echo "       --name fa_web \\"
 echo "       genebarker/frontaccounting --http"
 echo
@@ -114,10 +114,10 @@ echo
 echo "   (then use 'fa_db' for the MySQL hostname)"
 echo
 echo "To lockdown FA installation scripts after configuration:"
-echo "   $ docker exec fa_web /lockdown.sh"
+echo "   $ docker exec -it fa_web /lockdown.sh"
 echo
 echo "To bypass script, just enter desired command, i.e.:"
-echo "   $ docker run -i -t genebarker/frontaccounting bash"
+echo "   $ docker run -it genebarker/frontaccounting bash"
 echo
 echo "Key paths in the container:"
 echo "   /var/www/html  - FA webapp content"
