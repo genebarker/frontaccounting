@@ -1,7 +1,8 @@
 #----------------------------------------------------------------------
 # frontaccounting - a FrontAccounting on Debian 8 Docker Container
 #
-# build 31 
+# For usage info, just run the image without a command:
+#   $ docker run --rm genebarker/frontaccounting
 #----------------------------------------------------------------------
 
 FROM debian:8.1
