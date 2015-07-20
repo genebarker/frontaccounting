@@ -107,8 +107,8 @@ echo "   (the cert's CN must match the FQDN)"
 echo
 echo "To link FA with a MySQL container named 'fa_db', i.e.:"
 echo "   $ docker run -d -p 80:80 \\"
-echo "       --name fa_web"
-echo "       --link fa_db:fa_db"
+echo "       --name fa_web \\"
+echo "       --link fa_db:fa_db \\"
 echo "       genebarker/frontaccounting --http"
 echo
 echo "   (then use 'fa_db' for the MySQL hostname)"

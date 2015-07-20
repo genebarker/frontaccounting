@@ -44,8 +44,8 @@ To run FA with strict HTTPS using your own keys, mount them, i.e.:
 
 To link FA with a MySQL container named 'fa_db', i.e.:
    $ docker run -d -p 80:80 \
-       --name fa_web
-       --link fa_db:fa_db
+       --name fa_web \
+       --link fa_db:fa_db \
        genebarker/frontaccounting --http
 
    (then use 'fa_db' for the MySQL hostname)
