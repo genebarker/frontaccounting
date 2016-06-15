@@ -1,6 +1,6 @@
 ## FrontAccounting
 
-FrontAccounting ([FA][1]) on Debian 8 (Jessie) with support for HTTP, HTTPS, & [HSTS][2].
+FrontAccounting ([FA][1]) on Debian 8 (Jessie) with support for HTTP, HTTPS, and [HSTS][2].
 
 For more infomation, see our article: [Why FrontAccounting][6].
 
