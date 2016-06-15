@@ -6,7 +6,7 @@ For more infomation, see our article: [Why FrontAccounting][6].
 
 ### Improvements
 
-Wow, over 5.2K pulls on [docker][7]. Thank you! We've been busy putting together a great new release. Hope you like it. Cheers.
+Wow, over 5.2K pulls on [docker][7]. Thank you! We put together a great new release. Enjoy.
 
 - upgraded FA to 2.3.25 (default)
 - upgraded OS to Debian 8.5
