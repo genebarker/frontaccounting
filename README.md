@@ -2,11 +2,11 @@
 
 FrontAccounting ([FA][1]) on Debian 8 (Jessie) with support for HTTP, HTTPS, and [HSTS][2].
 
-For more infomation, see our article: [Why FrontAccounting][6].
+For more infomation, see my article: [Why FrontAccounting][6].
 
 ### Improvements
 
-Wow, over 5.2K pulls on [docker][7]. Thank you! We put together a great new release. Enjoy.
+Wow, over 5.2K pulls on [docker][7]. Thank you! I put together a great new release. Enjoy.
 
 - upgraded FA to 2.3.25 (default)
 - upgraded OS to Debian 8.5
@@ -22,7 +22,7 @@ Wow, over 5.2K pulls on [docker][7]. Thank you! We put together a great new rele
 
 ```text
 $ docker pull mysql
-$ docker run -d -P --name fa_db -e MYSQL_ROOT_PASSWORD=quickDIRTY mysql 
+$ docker run -d -P --name fa_db -e MYSQL_ROOT_PASSWORD=quickDIRTY mysql
 $ docker exec -it fa_db mysqladmin -u root -p create fa23
   (enter quickDIRTY for password)
 ```
@@ -118,13 +118,13 @@ FA requires a MySQL DB for data storage, we recommend using:
 ## Notes
 
 - [FA][1] requires a MySQL database for data storage. This FA container does not include such a database - this is best served by using your own or even better, using the official MySQL container image ([mysql][3]).
-- The `--tag` and `--branch` options allow us to use this docker image for the different versions of FA. Check the source repository's [Wiki][5] to see the tags and branches currently available.
-- This image uses a forked copy [genebarker/FA][4] of the official FA repository. We use this fork to tag the official releases and hold copies of our changes in different branches. For more, see the repository's [Wiki][5].
+- The `--tag` and `--branch` options allow you to use this docker image for the different versions of FA. Check the source repository's [Wiki][5] to see the tags and branches currently available.
+- This image uses a forked copy [genebarker/FA][4] of the official FA repository. I use this fork to tag the official releases and hold copies of my changes in different branches. For more, see the repository's [Wiki][5].
 
 [1]: http://frontaccounting.com/fawiki/
 [2]: http://en.wikipedia.org/wiki/HTTP_Strict_Transport_Security
 [3]: https://hub.docker.com/_/mysql/
 [4]: https://github.com/genebarker/FA
 [5]: https://github.com/genebarker/FA/wiki
-[6]: http://architect.madman.com/2015/04/why-frontaccounting.html 
+[6]: http://architect.madman.com/2015/04/why-frontaccounting.html
 [7]: https://hub.docker.com/r/genebarker/frontaccounting/
