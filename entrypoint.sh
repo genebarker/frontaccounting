@@ -3,7 +3,8 @@ set -e
 echo "frontaccounting - FrontAccounting on Debian 8 Docker Container"
 
 # set constants
-FA_PROD_TAG="2.3.25"
+FA_PROD_TAG="2.4.3"
+MYSQL_TAG="5.6"
 WEBROOT="/var/www/html"
 OLDINDEX="/root/oldfiles/index.html"
 OLDKEY="/root/oldfiles/ssl-cert-snakeoil.key"
@@ -21,7 +22,7 @@ show_usage ()
     echo "  -s, --https FQDN   Run FA using HTTPS (port 443)"
     echo "  -S, --hsts FQDN    Run FA using HSTS (ports 80 and 443)"
     echo "  -t, --tag TAG      Version of FA webapp to use"
-    echo "                     (defaults to 2.3.25)"
+    echo "                     (defaults to $FA_PROD_TAG)"
     echo "  -b, --branch NAME  Use latest commit in given branch of "
     echo "                     FA webapp repository"
     echo "  -O, --overwrite    Overwrite existing FA webapp content with"
@@ -70,7 +71,7 @@ show_usage ()
     echo "  /etc/ssl/certs/ssl-cert-snakeoil.pem    - Public SSL cert"
     echo
     echo "FA requires a MySQL DB for data storage, we recommend using:"
-    echo "  https://hub.docker.com/_/mysql/"
+    echo "  mysql:$MYSQL_TAG image at https://hub.docker.com/_/mysql/"
 }
 
 init_content ()

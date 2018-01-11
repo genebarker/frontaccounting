@@ -6,24 +6,23 @@ For more infomation, see my article: [Why FrontAccounting][6].
 
 ### Improvements
 
-Wow, over 5.2K pulls on [docker][7]. Thank you! I put together a great new release. Enjoy.
+Updated to support FA 2.4! Over 5.4K pulls on [docker][7]. Thank you.
 
-- upgraded FA to 2.3.25 (default)
-- upgraded OS to Debian 8.5
-- added option to use regular HTTPS
-- added `--tag` option to select FA release
-- added `--branch` option to select desired FA branch
-- added `--overwrite` option to overwrite mounted version
+- upgraded FA to 2.4.3 (default)
+- upgraded OS to Debian 8.10
+- updated Quick Start and notes to use MySQL 5.6
 - improved help and this readme
+
+Please note, that this image remains on Debian 8 and recommends MySQL 5.6 to avoid open issues with FA.
 
 ## Quick Start
 
 (1) Spin-up mysql container and create database for FA:
 
 ```text
-$ docker pull mysql
-$ docker run -d -P --name fa_db -e MYSQL_ROOT_PASSWORD=quickDIRTY mysql
-$ docker exec -it fa_db mysqladmin -u root -p create fa23
+$ docker pull mysql:5.6
+$ docker run -d -P --name fa_db -e MYSQL_ROOT_PASSWORD=quickDIRTY mysql:5.6
+$ docker exec -it fa_db mysqladmin -u root -p create fa24
   (enter quickDIRTY for password)
 ```
 
@@ -37,9 +36,9 @@ $ docker run -d -p 80:80 --link fa_db:fa_db genebarker/frontaccounting --http
 (3) Open browser, enter your host's URL, and on Step 2: Database Server Settings:
 
 - Server Host: `fa_db`
+- Database Name: `fa24`
 - Database User: `root`
 - Database Password: `quickDIRTY`
-- Database Name: `fa23`
 
 (4) Enjoy!
 
@@ -63,7 +62,7 @@ Options:
   -s, --https FQDN   Run FA using HTTPS (port 443)
   -S, --hsts FQDN    Run FA using HSTS (ports 80 and 443)
   -t, --tag TAG      Version of FA webapp to use
-                     (defaults to 2.3.25)
+                     (defaults to 2.4.3)
   -b, --branch NAME  Use latest commit in given branch of
                      FA webapp repository
   -O, --overwrite    Overwrite existing FA webapp content with
@@ -112,12 +111,12 @@ Key paths in the container:
   /etc/ssl/certs/ssl-cert-snakeoil.pem    - Public SSL cert
 
 FA requires a MySQL DB for data storage, we recommend using:
-  https://hub.docker.com/_/mysql/
+  mysql:5.6 at https://hub.docker.com/_/mysql/
 ```
 
 ## Notes
 
-- [FA][1] requires a MySQL database for data storage. This FA container does not include such a database - this is best served by using your own or even better, using the official MySQL container image ([mysql][3]).
+- [FA][1] requires a MySQL 5.6 database for data storage. This FA container does not include such a database - this is best served by using your own or even better, using the official MySQL container image ([mysql][3]).
 - The `--tag` and `--branch` options allow you to use this docker image for the different versions of FA. Check the source repository's [Wiki][5] to see the tags and branches currently available.
 - This image uses a forked copy [genebarker/FA][4] of the official FA repository. I use this fork to tag the official releases and hold copies of my changes in different branches. For more, see the repository's [Wiki][5].
 

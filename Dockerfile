@@ -2,7 +2,7 @@
 # frontaccounting - a FrontAccounting on Debian 8 Docker Container
 #----------------------------------------------------------------------
 
-FROM debian:8.5
+FROM debian:8.10
 
 MAINTAINER Eugene F. Barker <genebarker@gmail.com>
 
